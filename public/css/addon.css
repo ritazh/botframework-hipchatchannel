@@ -1,0 +1,20 @@
+/* add-on styles */
+
+/* Styles for the sidebar to support the single page content approach. */
+.content-target {
+  display: none;
+  position: absolute;
+  top: 0;
+}
+.aui-connect-content,
+:target ~ .aui-connect-content,
+:target ~ .aui-connect-content:last-child {
+  display: none;
+}
+:target + .aui-connect-content,
+:target + .aui-connect-content:last-child {
+  display: block;
+}
+.aui-connect-content:last-child {
+  display: block;
+}

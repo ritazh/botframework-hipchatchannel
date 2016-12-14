@@ -1,0 +1,108 @@
+{{!< layout}}
+
+        <!-- the Javascript file js/addon.js is imported in the layout -->
+        <!-- It contains functions which execute actions for buttons/links in this page -->
+
+<section class="aui-connect-page" role="main">
+
+  <!-- Horizontal navigation tabs -->
+  <nav class="aui-navgroup aui-navgroup-horizontal">
+    <div class="aui-navgroup-inner">
+      <div class="aui-navgroup-primary">
+        <ul class="aui-nav">
+          <li class="aui-nav-selected"><a href="#group-info">Group</a></li>
+          <li><a href="#room-info">Room</a></li>
+          <li><a href="#user-info">User</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Below here are three pairs of span/section elements corresponding to each of the tabs. The
+       custom CSS in addon.css and JS in sidebar-page-switcher.js combine to provide a single
+       page experience. -->
+
+  <span id="room-info" class="content-target"></span>
+  <section class="aui-connect-content with-list">
+    <ol class="aui-connect-list">
+      <li class="aui-connect-list-item">
+        <div class="aui-connect-list-item-header">
+          <span class="aui-avatar aui-avatar-xsmall">
+              <span class="aui-avatar-inner">
+                  <img style="background-color: #ccc;" />
+              </span>
+          </span>
+          <span class="aui-connect-list-item-title">Room details</span>
+        </div>
+        <ul class="aui-connect-list-item-attributes">
+          <li>ID: <a href="#" id="show-room-details">{{identity.roomId}}</a></li>
+          <li><a href="#" id="show-room-participants">Participants</a></li>
+          <li>Updated: 02:30 PM</li>
+        </ul>
+        <h3 id="room-participants-title"></h3>
+        <div id="room-participants-details"></div>
+        <h3 id="more-room-details-title"></h3>
+        <div id="more-room-details-body"></div>
+      </li>
+    </ol>
+  </section>
+
+  <span id="user-info" class="content-target"></span>
+  <section class="aui-connect-content with-list">
+    <ol class="aui-connect-list">
+      <li class="aui-connect-list-item">
+        <div class="aui-connect-list-item-header">
+          <span class="aui-avatar aui-avatar-xsmall">
+              <span class="aui-avatar-inner">
+                  <img style="background-color: #ccc;" />
+              </span>
+          </span>
+          <span class="aui-connect-list-item-title">User details</span>
+        </div>
+        <ul class="aui-connect-list-item-attributes">
+          <li>ID: <a href="#" id="show-user-details">{{identity.userId}}</a></li>
+          <li>Updated: 02:30 PM</li>
+        </ul>
+        <h3 id="more-user-details-title"></h3>
+        <div id="more-user-details-body"></div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- In this single page hack outlined above, the last section is visible initially. -->
+  <span id="group-info" class="content-target"></span>
+  <section class="aui-connect-content with-list">
+    <ol class="aui-connect-list">
+      <li class="aui-connect-list-item">
+        <div class="aui-connect-list-item-actions">
+          <button class="aui-dropdown2-trigger aui-button aui-dropdown2-trigger-arrowless" aria-owns="my-list-menu-items"
+                  aria-haspopup="true" id="my-list-action-menu" data-no-focus="true">
+            <span class="aui-icon aui-icon-small aui-iconfont-more"></span>
+          </button>
+          <div id="my-list-menu-items" class="aui-style-default aui-dropdown2 aui-connect-list-item-action">
+            <ul class="aui-list-truncate">
+              <li><a href="#">My menu item</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="aui-connect-list-item-header">
+          <span class="aui-avatar aui-avatar-xsmall">
+              <span class="aui-avatar-inner">
+                  <img style="background-color: #ccc;" />
+              </span>
+          </span>
+          <span class="aui-connect-list-item-title">Group details</span>
+        </div>
+        <ul class="aui-connect-list-item-attributes">
+          <li>ID: {{identity.groupId}}</li>
+          <li>Updated: 02:30 PM</li>
+        </ul>
+      </li>
+    </ol>
+  </section>
+
+</section>
+<footer class="aui-connect-footer">
+  <a href="#">Log out</a>
+</footer>
+<script src="/js/sidebar-page-switcher.js"></script>
