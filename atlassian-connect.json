@@ -18,8 +18,8 @@
         "view_room"
       ],
       "avatar": {
-        "url": "{{localBaseUrl}}/img/logo.png",
-        "url@2x": "{{localBaseUrl}}/img/logo.png"
+        "url": "http://abotars.hipch.at/meeple/ritazh",
+        "url@2x": "http://abotars.hipch.at/meeple/ritazh"
       }
     },
     "installable": {

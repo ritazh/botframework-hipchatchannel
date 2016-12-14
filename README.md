@@ -1,9 +1,9 @@
-# Atlassian Add-on using Express
+# HipChat Channel for Microsoft Bot Framework
 
-Congratulations! You've successfully created a HipChat Connect Add-on using the Express web application framework.
+Built as a HipChat Connect add-on using Atlassian-Connect-Express
 
-## What's next?
+> :triangular_flag_on_post: **IN PROGRESS** This repo is still a work-in-progress. Please check back later.  
 
-* [Read the tutorial](https://developer.atlassian.com/hipchat/tutorials/getting-started-with-atlassian-connect-express-node-js).
-* [Read the HipChat Connect guides](https://developer.atlassian.com/hipchat/guide)
-* [View the HipChat API reference](https://www.hipchat.com/docs/apiv2)
+## What is it?
+
+Bot Framework currently supports these [Channels](https://docs.botframework.com/en-us/faq/#what-channels-does-the-bot-framework-currently-support) out of the box. To create support for your own channel, you need to use Direct Line to expose your bots to your channel. This HipChat Channel for Bot Framework is a demonstration of how to implement your own channel support for bot framework bots. 
