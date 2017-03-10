@@ -3,8 +3,7 @@
   "name": "Hello!",
   "description": "My very first HipChat add-on",
   "vendor": {
-    "name": "Rita Zhang
-    ",
+    "name": "Rita Zhang",
     "url": "https://www.hipchat.com"
   },
   "links": {
@@ -30,67 +29,10 @@
     },
     "webhook": {
       "url": "{{localBaseUrl}}/webhook",
-      "pattern": "^hello",
+      "pattern": ".*",
       "event": "room_message",
-      "name": "Hello!",
+      "name": "all_messages",
       "authentication": "jwt"
-    },
-    "glance": [
-      {
-        "name": {
-          "value": "Hello!"
-        },
-        "queryUrl": "{{localBaseUrl}}/glance",
-        "key": "sample.glance",
-        "target": "sample.sidebar",
-        "icon": {
-          "url": "{{localBaseUrl}}/img/logo.png",
-          "url@2x": "{{localBaseUrl}}/img/logo.png"
-        }
-      }
-    ],
-    "webPanel": [
-      {
-        "key": "sample.sidebar",
-        "name": {
-          "value": "Hello Sidebar!"
-        },
-        "location": "hipchat.sidebar.right",
-        "url": "{{localBaseUrl}}/sidebar"
-      }
-    ],
-    "dialog": [
-      {
-        "key": "sample.dialog",
-        "title": {
-          "value": "Hello Dialog!"
-        },
-        "url": "{{localBaseUrl}}/dialog",
-        "options": {
-          "style": "normal",
-          "primaryAction": {
-            "name": {
-              "value": "Say Hello!"
-            },
-            "key": "sample.dialog.action",
-            "enabled": true
-          },
-          "size": {
-            "width": "400px",
-            "height": "200px"
-          }
-        }
-      }
-    ],
-    "action": [
-      {
-        "key": "sample.action",
-        "name": {
-          "value": "Open Hello Dialog!"
-        },
-        "target": "sample.dialog",
-        "location": "hipchat.input.action"
-      }
-    ]
+    }
   }
 }

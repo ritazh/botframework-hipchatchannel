@@ -2,11 +2,33 @@ var http = require('request');
 var cors = require('cors');
 var uuid = require('uuid');
 var url = require('url');
+var RSVP = require('rsvp');
+var DirectLine = require('../lib/direct-line');
+var ActivityHandler = require('../lib/activity-handler');
 
 // This is the heart of your HipChat Connect add-on. For more information,
 // take a look at https://developer.atlassian.com/hipchat/tutorials/getting-started-with-atlassian-connect-express-node-js
 module.exports = function (app, addon) {
   var hipchat = require('../lib/hipchat')(addon);
+  var directLine = new DirectLine(process.env.DIRECT_LINE_SECRET);
+
+  addon.settings.getAllClientInfos().then(resp => {
+    console.log(resp)
+    resp.map(tenant => {
+      try {
+        directLine.startConversation(activity => {
+          var activities = ActivityHandler.handle(activity)
+
+          return Promise.all(activities.map(activity => {
+            return hipchat.sendMessage(tenant, tenant.roomId, activity.message || " ", { options: activity.options } , activity.card)
+          }))
+
+        })
+      } catch (err) {
+        console.error(err)
+      }
+    })
+  })
 
   // simple healthcheck
   app.get('/healthcheck', function (req, res) {
@@ -35,7 +57,7 @@ module.exports = function (app, addon) {
         }
       });
     }
-    );
+  );
 
   // This is an example route that's used by the default for the configuration page
   // https://developer.atlassian.com/hipchat/guide/configuration-page
@@ -50,75 +72,7 @@ module.exports = function (app, addon) {
       //   the roomId
       res.render('config', req.context);
     }
-    );
-
-  // This is an example glance that shows in the sidebar
-  // https://developer.atlassian.com/hipchat/guide/glances
-  app.get('/glance',
-    cors(),
-    addon.authenticate(),
-    function (req, res) {
-      res.json({
-        "label": {
-          "type": "html",
-          "value": "Hello World!"
-        },
-        "status": {
-          "type": "lozenge",
-          "value": {
-            "label": "NEW",
-            "type": "error"
-          }
-        }
-      });
-    }
-    );
-
-  // This is an example end-point that you can POST to to update the glance info
-  // Room update API: https://www.hipchat.com/docs/apiv2/method/room_addon_ui_update
-  // Group update API: https://www.hipchat.com/docs/apiv2/method/addon_ui_update
-  // User update API: https://www.hipchat.com/docs/apiv2/method/user_addon_ui_update
-  app.post('/update_glance',
-    cors(),
-    addon.authenticate(),
-    function (req, res) {
-      res.json({
-        "label": {
-          "type": "html",
-          "value": "Hello World!"
-        },
-        "status": {
-          "type": "lozenge",
-          "value": {
-            "label": "All good",
-            "type": "success"
-          }
-        }
-      });
-    }
-    );
-
-  // This is an example sidebar controller that can be launched when clicking on the glance.
-  // https://developer.atlassian.com/hipchat/guide/dialog-and-sidebar-views/sidebar
-  app.get('/sidebar',
-    addon.authenticate(),
-    function (req, res) {
-      res.render('sidebar', {
-        identity: req.identity
-      });
-    }
-    );
-
-  // This is an example dialog controller that can be launched when clicking on the glance.
-  // https://developer.atlassian.com/hipchat/guide/dialog-and-sidebar-views/dialog
-  app.get('/dialog',
-    addon.authenticate(),
-    function (req, res) {
-      res.render('dialog', {
-        identity: req.identity
-      });
-    }
-    );
+  );
 
   // Sample endpoint to send a card notification back into the chat room
   // See https://developer.atlassian.com/hipchat/guide/sending-messages
@@ -140,19 +94,27 @@ module.exports = function (app, addon) {
       hipchat.sendMessage(req.clientInfo, req.identity.roomId, msg, opts, card);
       res.json({ status: "ok" });
     }
-    );
+  );
 
   // This is an example route to handle an incoming webhook
   // https://developer.atlassian.com/hipchat/guide/webhooks
   app.post('/webhook',
     addon.authenticate(),
     function (req, res) {
-      hipchat.sendMessage(req.clientInfo, req.identity.roomId, 'pong')
-        .then(function (data) {
-          res.sendStatus(200);
-        });
-    }
-    );
+        directLine.postActivity({
+          type: 'message',
+          text: req.body.item.message.message,
+          from: {
+            id: req.body.item.message.from.id,
+            name: req.body.item.message.from.name
+          }
+        }).then(() => {
+        res.sendStatus(200);
+      }).catch(err => {
+        console.log(err)
+        res.sendStatus(500);
+      });
+  });
 
   // Notify the room that the add-on was installed. To learn more about
   // Connect's install flow, check out:

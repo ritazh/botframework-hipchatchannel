@@ -14,6 +14,9 @@
         "watch": false,
         // This is the port your Express server will listen on
         "port": 3000,
+
+        "localBaseUrl": "https://44dc1dc3.ngrok.io",
+
         // This allows the jwt token to be valid for 24 hours. This is only in development.
         // The default for production is 15 minutes.
         "maxTokenAge": 86400,
@@ -65,10 +68,6 @@
         // and well suited for storing Connect client information. This requires the
         // `atlassian-connect-express-redis` module.
         //
-        // "store": {
-        //   "adapter": "redis",
-        //   "url": "redis://localhost:6379"
-        // },
         "store": {
             "adapter": "redis",
             "url": "redis://localhost:6379"
