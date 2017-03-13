@@ -1,6 +1,6 @@
 # HipChat Channel for Microsoft Bot Framework
 
-This project serves as an example of how one can build a HipChat Connect add-on using [Atlassian-Connect-Express](https://developer.atlassian.com/hipchat/tutorials/getting-started-with-atlassian-connect-express-node-js) and [DirectLine](https://docs.botframework.com/en-us/restapi/directline3/).
+This project serves as an example of how one can build a HipChat Connect add-on for Microsoft Bot Framework bots using [Atlassian-Connect-Express](https://developer.atlassian.com/hipchat/tutorials/getting-started-with-atlassian-connect-express-node-js) and [DirectLine](https://docs.botframework.com/en-us/restapi/directline3/).
 
 ## What
 
@@ -22,13 +22,13 @@ The [Microsoft Bot Framework](https://dev.botframework.com/) natively supports a
 
     Update the `localBaseUrl` variable in `config.json` with the HTTPS address of your ngrok instance
 
-3. Configure the Direct Line secret
+3. Configure the Direct Line secret for your Microsoft Bot Framework bot
 
     ```
     $ export DIRECT_LINE_SECRET=[your_direct_line_secret]
     ```
 
-    The Direct Line Secret can be obtained through the Bot Framework developer portal in the channels list. Ensure that v3.0 is enabled.
+    Assuming you already have a bot running using the Microsoft Bot Framework, the Direct Line Secret can be obtained through the Bot Framework developer portal in the channels list. Ensure that v3.0 is enabled.
 
 4. Start Redis
 
@@ -45,7 +45,8 @@ The [Microsoft Bot Framework](https://dev.botframework.com/) natively supports a
 
 ## Usage
 
-1. Install the connector to your HipChat instance. See [this](https://confluence.atlassian.com/hc/integrations-with-hipchat-server-683508267.html#IntegrationswithHipChatServer-IntegratingHipChatBots) for further details.
-2. Start your bot created using the Microsoft Bot Framework
-3. ???
-4. Profit!
+1. Deploy your bot created using the Microsoft Bot Framework
+2. Get the Direct Line Secret from the Bot Framework developer portal and configure the `DIRECT_LINE_SECRET` env variable
+3. From a browser, navigate to the HTTPS address of your ngrok instance
+4. Install the connector to a room in your HipChat instance. See [this](https://confluence.atlassian.com/hc/integrations-with-hipchat-server-683508267.html#IntegrationswithHipChatServer-IntegratingHipChatBots) for further details.
+5. Start chatting with the bot
