@@ -1,10 +1,10 @@
 {
   "key": "my-add-on",
-  "name": "Hello!",
-  "description": "My very first HipChat add-on",
+  "name": "HipChat Channel for Microsoft Bot Framework!",
+  "description": "Use this page to add your Microsoft bot to HipChat",
   "vendor": {
     "name": "Rita Zhang",
-    "url": "https://www.hipchat.com"
+    "url": "https://github.com/ritazh/botframework-hipchatchannel"
   },
   "links": {
     "self": "{{localBaseUrl}}/atlassian-connect.json",
