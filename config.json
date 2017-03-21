@@ -15,7 +15,7 @@
         // This is the port your Express server will listen on
         "port": 3000,
 
-        "localBaseUrl": "https://44dc1dc3.ngrok.io",
+        "localBaseUrl": "https://8eaa5e80.ngrok.io",
 
         // This allows the jwt token to be valid for 24 hours. This is only in development.
         // The default for production is 15 minutes.

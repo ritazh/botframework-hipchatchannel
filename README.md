@@ -48,6 +48,8 @@ The [Microsoft Bot Framework](https://dev.botframework.com/) natively supports a
 ## Usage
 
 1. Deploy your bot created using the Microsoft Bot Framework
+    You can use the [sample bot](bot/) included in this project. 
+    
 2. Get the Direct Line Secret from the Bot Framework developer portal and configure the `DIRECT_LINE_SECRET` env variable
 3. From a browser, navigate to the HTTPS address of your ngrok instance
 
